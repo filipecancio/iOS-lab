@@ -1,56 +1,92 @@
 /**
- > Ver aula [Aula 02 - Conceitos básicos](https://github.com/filipecancio/iOS-lab/wiki/Aula-2---Conceitos-básicos)
+ Ver aula Aula 04 - [Loops](https://github.com/filipecancio/iOS-lab/wiki/Aula-04-%E2%80%90-Loops)
  */
-
 let bronzeChallenge = """
- 🥉 Desafio Bronze: Apresentação pessoal
- Crie variáveis para armazenar nome, idade e cidade, então exiba uma mensagem de apresentação, utilizando as variáveis criadas.
+ 
+ 🥉 Desafio Bronze: Contador de passos
+Crie um programa que conte quantos passos uma pessoa deu em um dia. O programa começará com 0 passos, contando até atingir 10.000 passos.
+
+Dica: Utilize a função `Int.random(in:)`.
 
 """
 print(bronzeChallenge)
 
-var name: String = "Manuel"
-var age: Int = 30
-var city: String = "São Paulo"
+var currentSteps = 0
 
-print("Olá, meu nome é \(name), tenho \(age) anos e moro em \(city).")
+while currentSteps < 10000 {
+    currentSteps += Int.random(in: 1...798)
+    let message = switch currentSteps {
+    case 0..<2000: "Você andou \(currentSteps) passos."
+    case 2001..<5000: "Você está chegando na média! Já andou \(currentSteps) passos!"
+    case 5001..<9000: "Você está acima da média! Já andou \(currentSteps) passos!"
+    case 9001..<9999: "Você está chegando no objetivo diário! Já andou \(currentSteps) passos!"
+    default: "Wow! Você superou o limite diário!"
+    }
+    print(message)
+}
+
+print("Parabéns, hoje você andou \(currentSteps) passos!")
 
 let silverChallenge = """
-------
 
-  🥈 Desafio Prata: Contador de economia
-  Crie um programa que simula uma economia mensal ao longo de 3 meses.  Adicione o valor inicial da economia.  Defina 3 valores fixos da economia para cada um dos próximos meses.  Exiba o valor total economizado ao final do período.
+ 🥈 Desafio Prata: Validação de senhas
+Crie um sistema que peça para o usuário inserir uma senha. O sistema só aceitará a senha correta: "SwiftRocks".
 
 """
 print(silverChallenge)
 
-var initialSavings: Double = 1000.0
+let brutalForcepass = [
+    "lalala",
+    "1234",
+    "0000",
+    "SwiftRocks"
+]
 
-let month1: Double = 200.0
-let month2: Double = 150.0
-let month3: Double = 250.0
+let rightPass = "SwiftRocks"
 
-var totalSavings: Double = initialSavings + month1 + month2 + month3
-print("Total economizado após 3 meses: R$ \(totalSavings)")
+for pass in brutalForcepass {
+    print("Por favor insira a senha:")
+    print("Senha: \(pass)")
+    if pass == rightPass { break }
+    print("""
+        
+        Senha incorreta. Tente novamente!
+        -----
+        
+        """)
+}
+
+print("""
+    
+    Login efetuado com sucesso!
+    -----
+    
+    """)
 
 
 let goldChallenge = """
-------
+ 🥇 Desafio Ouro: FizzBuzz
+Crie um programa que exiba os números de 1 a 50 com as seguintes regras:
 
-  🥇 Desafio Ouro: Conversor de moedas
-  Crie um programa que converte um valor em reais para dólares e euros, considerando taxas de câmbio fixas.  Insira o valor a ser convertido.  Defina as taxas de cambio.  Calcule os valores convertidos e exiba o resultado.
-
+Se o número for múltiplo de 3, exiba "Fizz".
+Se o número for múltiplo de 5, exiba "Buzz".
+Se for múltiplo de 3 e 5, exiba "FizzBuzz".
 """
+
 print(goldChallenge)
 
-let exchangeRateUSD: Double = 5.25
-let exchangeRateEUR: Double = 6.00
-
-var amountInBRL: Double = 1000.0
-
-let amountInUSD: Double = amountInBRL / exchangeRateUSD
-let amountInEUR: Double = amountInBRL / exchangeRateEUR
-
-let resultMessage = "R$ \(amountInBRL) equivalem a US$ \(amountInUSD) e € \(amountInEUR)."
-
-print(resultMessage)
+for num in 1...50 {
+    let message = switch(num){
+    case num where num % 3 == 0 && num % 5 == 0  :
+        " - FizzBuzz"
+    case num where num % 3 == 0  :
+        " - Fizz"
+    case num where num % 5 == 0  :
+        " - Buzz"
+    default:
+        ""
+    }
+    
+    print("numero: \(num) \(message)")
+    
+}
