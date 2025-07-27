@@ -1,92 +1,134 @@
 /**
- Ver aula Aula 04 - [Loops](https://github.com/filipecancio/iOS-lab/wiki/Aula-04-%E2%80%90-Loops)
+ Ver aula [Aula 05 - Condicionais](https://github.com/filipecancio/iOS-lab/wiki/Aula-05-‐-Swift:-Condicionais)
  */
 let bronzeChallenge = """
  
- 🥉 Desafio Bronze: Contador de passos
-Crie um programa que conte quantos passos uma pessoa deu em um dia. O programa começará com 0 passos, contando até atingir 10.000 passos.
+ 🥉  Desafio Bronze: Simulador de Previsão do Tempo 
 
-Dica: Utilize a função `Int.random(in:)`.
+O programa recebe a temperatura atual e informa a condição climática, sugerindo o que vestir.
+
+* **Regras:** 
+    * Menor que 10°C: "Muito frio! Vista um casaco pesado".
+    * Entre 10°C e 19°C: "Clima fresco! Um moletom deve bastar".
+    * Entre 20°C e 29°C: "Tempo agradável! Uma roupa leve é ideal".
+    * 30°C ou mais: "Muito quente! Use roupas leves e beba bastante água".
 
 """
 print(bronzeChallenge)
 
-var currentSteps = 0
+let currentWether = Double.random(in: 0.0...32.0)
 
-while currentSteps < 10000 {
-    currentSteps += Int.random(in: 1...798)
-    let message = switch currentSteps {
-    case 0..<2000: "Você andou \(currentSteps) passos."
-    case 2001..<5000: "Você está chegando na média! Já andou \(currentSteps) passos!"
-    case 5001..<9000: "Você está acima da média! Já andou \(currentSteps) passos!"
-    case 9001..<9999: "Você está chegando no objetivo diário! Já andou \(currentSteps) passos!"
-    default: "Wow! Você superou o limite diário!"
-    }
-    print(message)
-}
-
-print("Parabéns, hoje você andou \(currentSteps) passos!")
-
-let silverChallenge = """
-
- 🥈 Desafio Prata: Validação de senhas
-Crie um sistema que peça para o usuário inserir uma senha. O sistema só aceitará a senha correta: "SwiftRocks".
-
-"""
-print(silverChallenge)
-
-let brutalForcepass = [
-    "lalala",
-    "1234",
-    "0000",
-    "SwiftRocks"
-]
-
-let rightPass = "SwiftRocks"
-
-for pass in brutalForcepass {
-    print("Por favor insira a senha:")
-    print("Senha: \(pass)")
-    if pass == rightPass { break }
-    print("""
-        
-        Senha incorreta. Tente novamente!
-        -----
-        
-        """)
+let message = switch currentWether {
+    case ..<10.0: "Muito frio! Vista um casaco pesado"
+    case 10.0...19.0: "Clima fresco! Um moletom deve bastar"
+    case 20.0...29.0: "Tempo agradável! Uma roupa leve é ideal"
+    default: "Muito quente! Use roupas leves e beba bastante água"
 }
 
 print("""
+    Está fazendo \(currentWether) graus! \(message)
+    ----
     
-    Login efetuado com sucesso!
-    -----
+    
+    
+    """)
+
+
+let silverChallenge = """
+
+ 🥈  Desafio Prata: Gerenciador de Estoque de Loja Online 
+
+O sistema classifica o status do estoque de um produto para facilitar a reposição.
+
+* **Regras:** 
+    * 0 unidades: "Produto fora de estoque".
+    * 1 a 5 unidades: "Estoque baixo".
+    * 6 a 20 unidades: "Estoque médio".
+    * 21 unidades ou mais: "Estoque alto".
+    * Se o estoque for baixo ou zerado, exiba um alerta recomendando a reposição.
+
+"""
+print(silverChallenge)
+let currentStock = Int.random(in: 0...320)
+
+let messageStock = switch currentStock {
+    case  ..<0: "Produto fora de estoque"
+    case 1...5: "Estoque baixo"
+    case 6...20: "Estoque médio"
+    default: "Estoque alto"
+}
+
+print("""
+    Temos \(currentStock) unidades! \(messageStock)
+    ----
+    
+    
     
     """)
 
 
 let goldChallenge = """
- 🥇 Desafio Ouro: FizzBuzz
-Crie um programa que exiba os números de 1 a 50 com as seguintes regras:
+Desafio Ouro: Gerador de NPCs para o jogo RPG
 
-Se o número for múltiplo de 3, exiba "Fizz".
-Se o número for múltiplo de 5, exiba "Buzz".
-Se for múltiplo de 3 e 5, exiba "FizzBuzz".
+O sistema gera NPCs, classificando-os por idade e definindo uma função aleatória.
+
+* **Regras de Idade:**
+    * 1 a 12 anos: "Criança".
+    * 13 a 17 anos: "Adolescente".
+    * 18 a 64 anos: "Adulto".
+    * 65 anos ou mais: "Idoso".
+* **Funções Aleatórias:**
+    * Mercador
+    * Guerreiro
+    * Curandeiro
+    * Ladrão
+* **Dica:** Use a função `Int.random(in:)` para gerar números aleatórios.
 """
 
 print(goldChallenge)
 
-for num in 1...50 {
-    let message = switch(num){
-    case num where num % 3 == 0 && num % 5 == 0  :
-        " - FizzBuzz"
-    case num where num % 3 == 0  :
-        " - Fizz"
-    case num where num % 5 == 0  :
-        " - Buzz"
-    default:
-        ""
+enum Age {
+    case Child
+    case Teen
+    case Adult
+    case OldAge
+    
+    static func byRaw(rawValue: Int) -> Age {
+        return switch(rawValue){
+        case 1...12 : .Child
+        case 13...17 : .Teen
+        case 18...64 : .Adult
+        default : .OldAge
+        }
     }
-    
-    print("numero: \(num) \(message)")
-    
 }
+
+enum Role: Int, CustomStringConvertible {
+    case Mercador
+    case Guerreiro
+    case Curandeiro
+    case Ladrao
+    
+    var description: String{
+        switch(self){
+        case .Mercador: "Mercador"
+        case .Guerreiro: "Guerreiro"
+        case .Curandeiro: "Curandeiro"
+        case .Ladrao: "Ladrao"
+        }
+    }
+}
+
+for i in 1...10 {
+    let ageNumber = Int.random(in: 1...20)
+    let roleNumber = Int.random(in: 0...3)
+    
+    let personRole: Role = Role(rawValue: roleNumber)!
+    let age = Age.byRaw(rawValue: ageNumber)
+    
+    print("""
+        
+        Jogador de Idade:\(age) (\(ageNumber) anos) Função \(personRole) criado!
+        """)
+}
+
