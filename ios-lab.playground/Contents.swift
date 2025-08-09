@@ -1,73 +1,54 @@
-import Foundation
+let name = "Filipe"
 
-/**
- Ver aula [Aula 06 - Funções e Closures](https://github.com/filipecancio/iOS-lab/wiki/Aula-06-‐-Funções-e-Closures)
- */
-let bronzeChallenge = """
-🥉 Desafio Bronze: Contador de pares
+var age = 28
 
-Crie uma closure que recebe um array de números e retorna apenas os números pares. 
-"""
-print(bronzeChallenge)
+print("Olá Mundo sou o \(name) e tenho \(age) anos.")
 
-let toPair = {(arr: [Int]) -> [Int] in
-    var newArr = [] as [Int]
-    for num in arr {
-        if num.isMultiple(of: 2) {
-            newArr.append(num)
-        }
-    }
-    return newArr
-}
+var valor1 = 20
+var valor2 = 30
 
-let testArray1: [Int] = [1, 2, 3, 4, 5]
+var resultado = valor1 + valor2
 
-let result1 = toPair(testArray1)
+print(resultado)
 
-print("Exemplo 1: \(testArray1) So pares: \(result1)")
+let presName = "Marcelo"
+let presIdade = 34
+let presHobby = "jogar bola"
 
+let apresentacao = """
+Ola tudo bom?
 
-let silverChallenge = """
-
- 🥈 Desafio Prata: Processador de texto
-
- Crie uma função `processarTexto(texto: String, operacao: (String) -> String)` que recebe uma string e uma closure que pode modificar o texto, por exemplo, para maiúsculas. 
-
- * **Dica:** Utilize a função `.uppercased()`. 
-
-"""
-print(silverChallenge)
-
-let processarTexto = {(texto: String, operacao: (String) -> String) in
-    return """
-    texto: \(texto) 
-    resultado da operação: \(operacao(texto))
-    """
-}
-
-let message = processarTexto("exemplo"){ $0.uppercased()}
-print(message)
-
-let goldChallenge = """
-
-
-🥇 Desafio Ouro: Filtrar valores
-
-Crie uma função `filtrarValores(valores: [Int], condicao: (Int) -> Bool)` que recebe um array de números e uma closure que define a condição para quais valores devem ser mantidos no array. 
-
-* **Dica:** Utilize a função `.filter()`. 
+Meu nome: \(presName)
+Minha idade: \(presIdade)
+Meu hobby: \(presHobby)
 """
 
-print(goldChallenge)
+print(apresentacao)
 
-let filtrarValores = {(valores: [Int], condicao: (Int) -> Bool) in
-    return valores.filter(condicao)
+let MIN_AGE = 18
+let TOO_YOUNG_MESSAGE = "Você é menor de idade. Não pode ainda"
+let EXPECTED_AGE_MESSAGE = "Você é maior de idade. Já pode tirar a carteira"
+let INVALID_AGE_MESSAGE = "Idade inválida."
+
+var currAge = 23
+
+if currAge >= MIN_AGE {
+    print("Você é maior de idade.")
+} else {
+    print("Você é menor de idade.")
 }
 
-let numbers: [Int] = [1, 2, 3, 4, 5]
-let evenNumbers = filtrarValores(numbers) { $0.isMultiple(of: 2) }
+let message = currAge >= MIN_AGE ? "Você é maior de idade. Já pode tirar a carteira" : "Você é menor de idade. Não pode ainda"
 
 print("""
-    Exemplo 1: \(numbers) 
-    Números pares: \(evenNumbers)
+\(message)
+
 """)
+
+currAge = 260
+
+let newMessage = if currAge <= 0 || currAge >= 120  {INVALID_AGE_MESSAGE}
+else if currAge >= MIN_AGE {EXPECTED_AGE_MESSAGE}
+else {EXPECTED_AGE_MESSAGE}
+
+print(newMessage)
